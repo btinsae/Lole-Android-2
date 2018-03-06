@@ -19,6 +19,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +29,13 @@ import android.widget.ImageSwitcher;
 import android.widget.TextView;
 
 
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import fanos.com.lole.R;
@@ -47,6 +54,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TabLayout tabLayout;
     private Handler imageSwitchHandler;
     private ImageSwitcher imageSwitcher;
+
+    //Firebase auth instance
+    private FirebaseAuth mAuth;
+    // Choose an arbitrary request code value
+    private static final int RC_SIGN_IN = 123;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -75,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,18 +107,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         *
         *
         * **/
-        firstImage = true;
-         imageSwitcher=findViewById(R.id.promotion_image);
-        Animation imgAnimationIn =  AnimationUtils.
-                loadAnimation(this,   R.anim.shrink);
-        imageSwitcher.setInAnimation(imgAnimationIn);
-
-        Animation imgAnimationOut =  AnimationUtils.
-                loadAnimation(this,   R.anim.glow);
-        imageSwitcher.setOutAnimation(imgAnimationOut);
-
-        imageSwitchHandler = new Handler();
-        imageSwitchHandler.post(runnableCode);
+//        firstImage = true;
+//         imageSwitcher=findViewById(R.id.promotion_image);
+//        Animation imgAnimationIn =  AnimationUtils.
+//                loadAnimation(this,   R.anim.shrink);
+//        imageSwitcher.setInAnimation(imgAnimationIn);
+//
+//        Animation imgAnimationOut =  AnimationUtils.
+//                loadAnimation(this,   R.anim.glow);
+//        imageSwitcher.setOutAnimation(imgAnimationOut);
+//
+//        imageSwitchHandler = new Handler();
+//        imageSwitchHandler.post(runnableCode);
 
 
 
@@ -184,14 +197,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onFragmentInteraction(Uri uri) {
 
     }
+
     private Runnable runnableCode = new Runnable() {
         @Override
         public void run() {
 
-            if(firstImage){
+            if (firstImage) {
                 imageSwitcher.setImageResource(R.drawable.ic_home_black_24dp);
                 firstImage = false;
-            }else{
+            } else {
                 imageSwitcher.setImageResource(R.drawable.ic_account_circle_black_24dp);
                 firstImage = true;
             }
@@ -199,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             imageSwitchHandler.postDelayed(this, 3000);
         }
     };
+
     private List<ItemCategory> list() {
         List<ItemCategory> list = new ArrayList<>();
         for (int i = 0; i <= 5; i++) {
@@ -206,4 +221,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return list;
     }
+
+    
 }

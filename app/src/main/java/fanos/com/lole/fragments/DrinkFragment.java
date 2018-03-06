@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ public class DrinkFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,18 +70,24 @@ public class DrinkFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity());
+        recyclerView.setAdapter(adapter);
+        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.divider_drawable);
+        recyclerView.addItemDecoration(new RecyclerViewDecorator(drawable));
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_drink, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.price_recyclerview);
+        View view = inflater.inflate(R.layout.fragment_drink, container, false);
+        recyclerView = view.findViewById(R.id.price_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        Drawable drawable= ContextCompat.getDrawable(getActivity(),R.drawable.divider_drawable);
-        recyclerView.addItemDecoration(new RecyclerViewDecorator(drawable));
 
 
-        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity());
-        recyclerView.setAdapter(adapter);
+
         return view;
     }
 

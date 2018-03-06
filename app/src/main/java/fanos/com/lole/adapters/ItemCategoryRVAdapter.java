@@ -2,6 +2,7 @@ package fanos.com.lole.adapters;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fanos.com.lole.R;
+import fanos.com.lole.activities.SearchableActivity;
 import fanos.com.lole.model.ItemCategory;
 
 /**
@@ -48,13 +50,20 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
         return list.size();
     }
 
-    class ItemCategoryViewHolder extends RecyclerView.ViewHolder{
+    class ItemCategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private AppCompatImageView categoryIcon;
         private AppCompatTextView categoryName;
         ItemCategoryViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             categoryIcon=itemView.findViewById(R.id.item_category_icon);
             categoryName=itemView.findViewById(R.id.item_category_name);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent=new Intent(view.getContext(), SearchableActivity.class);
+            mContext.startActivity(intent);
         }
     }
 }

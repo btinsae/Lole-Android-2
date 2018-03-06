@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import fanos.com.lole.R;
 import fanos.com.lole.activities.DetailActivity;
+import fanos.com.lole.activities.ProgressActivity;
 
 /**
  * Created by Birhane on 2/17/2018.
@@ -47,7 +48,7 @@ public class ItemListRVAdapter extends RecyclerView.Adapter<ItemListRVAdapter.It
 
          @Override
          public void onClick(View view) {
-           Intent intent=new Intent(view.getContext(), DetailActivity.class);
+           Intent intent=new Intent(view.getContext(), ProgressActivity.class);
            mContext.startActivity(intent);
          }
      }

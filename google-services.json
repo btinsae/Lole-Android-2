@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1098561245754",
+    "firebase_url": "https://lole-5af3d.firebaseio.com",
+    "project_id": "lole-5af3d",
+    "storage_bucket": "lole-5af3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098561245754:android:060f5a50545b4ef0",
+        "android_client_info": {
+          "package_name": "fanos.com.lole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098561245754-q99rv391q6pal2onno08b7idh853b79u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fanos.com.lole",
+            "certificate_hash": "85d2ad2fc7d8537d82cabeefa796f3a810fb5ef0"
+          }
+        },
+        {
+          "client_id": "1098561245754-7ak33rhe3hk7ob2qrkg076eg1bf8pd12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp3Mbn0eJRJxLcs-At_6OCYP3-3R7cgg8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098561245754-7ak33rhe3hk7ob2qrkg076eg1bf8pd12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
