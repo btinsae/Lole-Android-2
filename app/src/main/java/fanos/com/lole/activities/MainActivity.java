@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -38,6 +39,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.adapters.ItemCategoryRVAdapter;
 import fanos.com.lole.adapters.ViewPagerAdapter;
@@ -48,12 +51,26 @@ import fanos.com.lole.model.ItemCategory;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrinkFragment.OnFragmentInteractionListener, FoodFragment.OnFragmentInteractionListener, LaundryFragment.OnFragmentInteractionListener {
 
-    private TextView mTextMessage;
+    @BindView(R.id.message)
+    @Nullable
+    TextView mTextMessage;
 
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
-    private Handler imageSwitchHandler;
-    private ImageSwitcher imageSwitcher;
+    @BindView(R.id.container)
+    ViewPager viewPager;
+    @BindView(R.id.tablayout)
+    TabLayout tabLayout;
+
+
+    @BindView(R.id.navigation)
+    BottomNavigationView navigation;
+    @BindView(R.id.item_category)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
 
     //Firebase auth instance
     private FirebaseAuth mAuth;
@@ -89,18 +106,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        tabLayout = findViewById(R.id.tablayout);
-        viewPager = findViewById(R.id.container);
+
         setupViewPager(viewPager);
 
         tabLayout.setupWithViewPager(viewPager);
 
 
-        mTextMessage = findViewById(R.id.message);
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         /*
@@ -126,20 +141,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /*
         *
         * */
-        RecyclerView mRecyclerView = findViewById(R.id.item_category);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         ItemCategoryRVAdapter mAdapter = new ItemCategoryRVAdapter(this, list());
         mRecyclerView.setAdapter(mAdapter);
 
         //Navigation Drawer
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -194,25 +209,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()==R.id.action_logout){
+            FirebaseAuth.getInstance().signOut();
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
-    private Runnable runnableCode = new Runnable() {
-        @Override
-        public void run() {
-
-            if (firstImage) {
-                imageSwitcher.setImageResource(R.drawable.ic_home_black_24dp);
-                firstImage = false;
-            } else {
-                imageSwitcher.setImageResource(R.drawable.ic_account_circle_black_24dp);
-                firstImage = true;
-            }
-
-            imageSwitchHandler.postDelayed(this, 3000);
-        }
-    };
+//    private Runnable runnableCode = new Runnable() {
+//        @Override
+//        public void run() {
+//
+//            if (firstImage) {
+//                imageSwitcher.setImageResource(R.drawable.ic_home_black_24dp);
+//                firstImage = false;
+//            } else {
+//                imageSwitcher.setImageResource(R.drawable.ic_account_circle_black_24dp);
+//                firstImage = true;
+//            }
+//
+//            imageSwitchHandler.postDelayed(this, 3000);
+//        }
+//    };
 
     private List<ItemCategory> list() {
         List<ItemCategory> list = new ArrayList<>();
@@ -222,5 +246,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return list;
     }
 
-    
+
 }

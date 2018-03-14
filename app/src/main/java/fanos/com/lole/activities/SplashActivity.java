@@ -2,6 +2,7 @@ package fanos.com.lole.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,27 +27,26 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     private static final int RC_ERROR = 321;
+    private static int SPLASH_TIME_OUT = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         mAuth = FirebaseAuth.getInstance();
-        Runnable runnable = new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (isLoggedIn()) {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    login();
                 }
             }
-        };
-        new Thread(runnable).start();
-        if (isLoggedIn()) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
+        }, SPLASH_TIME_OUT);
+
     }
 
 

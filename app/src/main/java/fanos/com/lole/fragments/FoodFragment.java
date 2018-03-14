@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.adapters.ItemListRVAdapter;
 import fanos.com.lole.utils.RecyclerViewDecorator;
@@ -33,6 +35,8 @@ public class FoodFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    @BindView(R.id.delight_recyclerview)
+    RecyclerView recyclerView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -73,9 +77,9 @@ public class FoodFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_food, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.delight_recyclerview);
+        ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        Drawable drawable= ContextCompat.getDrawable(getActivity(),R.drawable.divider_drawable);
+        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.divider_drawable);
         recyclerView.addItemDecoration(new RecyclerViewDecorator(drawable));
 
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="fanos.com.lole.activities.SplashActivity">
 
     <TextView
@@ -13,6 +14,7 @@
         android:layout_marginBottom="298dp"
         android:layout_marginTop="250dp"
         android:text="Lole"
+        android:textColor="@android:color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
