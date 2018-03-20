@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fanos.com.lole.R;
 import fanos.com.lole.activities.DetailActivity;
 import fanos.com.lole.activities.ProgressActivity;
@@ -17,15 +20,17 @@ import fanos.com.lole.activities.ProgressActivity;
  */
 
 public class ItemListRVAdapter extends RecyclerView.Adapter<ItemListRVAdapter.ItemListViewHolder> {
-    Context mContext;
+    private Context mContext;
+    private List<? extends Object> list = new ArrayList<>();
 
-    public ItemListRVAdapter(Context mContext) {
+    public ItemListRVAdapter(Context mContext, List<? extends Object> list) {
         this.mContext = mContext;
+        this.list=list;
     }
 
     @Override
     public ItemListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
 
         return new ItemListViewHolder(view);
     }
@@ -40,16 +45,16 @@ public class ItemListRVAdapter extends RecyclerView.Adapter<ItemListRVAdapter.It
         return 15;
     }
 
-     class ItemListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-         ItemListViewHolder(View itemView) {
+    class ItemListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ItemListViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
         }
 
-         @Override
-         public void onClick(View view) {
-           Intent intent=new Intent(view.getContext(), ProgressActivity.class);
-           mContext.startActivity(intent);
-         }
-     }
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), ProgressActivity.class);
+            mContext.startActivity(intent);
+        }
+    }
 }
