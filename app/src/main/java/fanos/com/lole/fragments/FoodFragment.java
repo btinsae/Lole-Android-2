@@ -11,12 +11,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.adapters.ItemListRVAdapter;
+import fanos.com.lole.model.Restaurant;
+import fanos.com.lole.network.RestaurantService;
 import fanos.com.lole.utils.RecyclerViewDecorator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,11 +94,32 @@ public class FoodFragment extends Fragment {
         recyclerView.addItemDecoration(new RecyclerViewDecorator(drawable));
 
 
-        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity());
+        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity(), nearByRestaurants(18.00, 25.00));
         recyclerView.setAdapter(adapter);
 
 
         return view;
+    }
+
+    private List<Restaurant> nearByRestaurants(double lat, double lng) {
+        final List<Restaurant> restaurantList = new ArrayList<>();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("")
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        RestaurantService client = retrofit.create(RestaurantService.class);
+        Call<List<Restaurant>> restaurants = client.getResturants(lat, lng);
+        restaurants.enqueue(new Callback<List<Restaurant>>() {
+            @Override
+            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+                restaurantList.addAll(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Something bad happend :)", Toast.LENGTH_LONG).show();
+            }
+        });
+        return restaurantList;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

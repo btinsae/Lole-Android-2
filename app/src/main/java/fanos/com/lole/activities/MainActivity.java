@@ -47,9 +47,11 @@ import fanos.com.lole.adapters.ViewPagerAdapter;
 import fanos.com.lole.fragments.DrinkFragment;
 import fanos.com.lole.fragments.FoodFragment;
 import fanos.com.lole.fragments.LaundryFragment;
+import fanos.com.lole.fragments.PriceFragment;
+import fanos.com.lole.fragments.SpeedFragment;
 import fanos.com.lole.model.ItemCategory;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrinkFragment.OnFragmentInteractionListener, FoodFragment.OnFragmentInteractionListener, LaundryFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SpeedFragment.OnFragmentInteractionListener, FoodFragment.OnFragmentInteractionListener, PriceFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.message)
     @Nullable
@@ -161,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FoodFragment(), "Delight");
-        adapter.addFragment(new DrinkFragment(), "Price");
-        adapter.addFragment(new LaundryFragment(), "Speed");
+        adapter.addFragment(new PriceFragment(), "Price");
+        adapter.addFragment(new SpeedFragment(), "Speed");
         viewPager.setAdapter(adapter);
     }
 

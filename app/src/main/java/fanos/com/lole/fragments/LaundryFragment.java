@@ -11,12 +11,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.adapters.ItemListRVAdapter;
+import fanos.com.lole.model.Laundry;
+import fanos.com.lole.network.LaundryService;
 import fanos.com.lole.utils.RecyclerViewDecorator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,9 +92,31 @@ public class LaundryFragment extends Fragment {
         recyclerView.addItemDecoration(new RecyclerViewDecorator(drawable));
 
 
-        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity());
+        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity(),getNearByLaundry());
         recyclerView.setAdapter(adapter);
         return view;
+    }
+
+    private List<Laundry> getNearByLaundry() {
+        final List<Laundry> laundryList=new ArrayList<>();
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        LaundryService client=retrofit.create(LaundryService.class);
+        Call<List<Laundry>> laundries=client.getLaundry(18.00, 25.00);
+        laundries.enqueue(new Callback<List<Laundry>>() {
+            @Override
+            public void onResponse(Call<List<Laundry>> call, Response<List<Laundry>> response) {
+                laundryList.addAll(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Laundry>> call, Throwable t) {
+                Toast.makeText(getActivity(),"Something goes wrong:)",Toast.LENGTH_LONG).show();
+            }
+        });
+        return laundryList;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

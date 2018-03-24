@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,9 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.adapters.ItemListRVAdapter;
-import fanos.com.lole.model.Drink;
 import fanos.com.lole.model.Restaurant;
-import fanos.com.lole.network.GroceryService;
 import fanos.com.lole.network.RestaurantService;
 import fanos.com.lole.utils.RecyclerViewDecorator;
 import retrofit2.Call;
@@ -35,26 +32,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DrinkFragment.OnFragmentInteractionListener} interface
+ * {@link SpeedFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DrinkFragment#newInstance} factory method to
+ * Use the {@link SpeedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DrinkFragment extends Fragment {
+public class SpeedFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    @BindView(R.id.speed_recyclerview)
+    RecyclerView recyclerView;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    @BindView(R.id.price_recyclerview)
-    RecyclerView recyclerView;
 
     private OnFragmentInteractionListener mListener;
 
-    public DrinkFragment() {
+    public SpeedFragment() {
         // Required empty public constructor
     }
 
@@ -64,11 +60,11 @@ public class DrinkFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DrinkFragment.
+     * @return A new instance of fragment SpeedFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DrinkFragment newInstance(String param1, String param2) {
-        DrinkFragment fragment = new DrinkFragment();
+    public static SpeedFragment newInstance(String param1, String param2) {
+        SpeedFragment fragment = new SpeedFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -86,56 +82,43 @@ public class DrinkFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity(), nearByRestaurants(18.00, 25.00));
-        recyclerView.setAdapter(adapter);
-        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.divider_drawable);
-        recyclerView.addItemDecoration(new RecyclerViewDecorator(drawable));
-    }
-
-    /**
-     * perform network request provided lat and lng of current location to provide with list of restaurants nearby
-     *
-     * @return list of restaurants in a near distance from the user.
-     */
-    private List<Drink> nearByRestaurants(double lat, double lng) {
-        final List<Drink> restaurantList = new ArrayList<>();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://")
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        GroceryService client = retrofit.create(GroceryService.class);
-
-        Call<List<Drink>> drinks = client.getGrocery(lat, lng);
-
-        drinks.enqueue(new Callback<List<Drink>>() {
-            @Override
-            public void onResponse(Call<List<Drink>> call, Response<List<Drink>> response) {
-                restaurantList.addAll(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Drink>> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        return restaurantList;
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_drink, container, false);
+        View view= inflater.inflate(R.layout.fragment_speed, container, false);
+
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.divider_drawable);
+        recyclerView.addItemDecoration(new RecyclerViewDecorator(drawable));
+
+
+        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity(), nearByRestaurants(18.00, 25.00));
+        recyclerView.setAdapter(adapter);
 
 
         return view;
     }
+    private List<Restaurant> nearByRestaurants(double lat, double lng) {
+        final List<Restaurant> restaurantList = new ArrayList<>();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("")
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        RestaurantService client = retrofit.create(RestaurantService.class);
+        Call<List<Restaurant>> restaurants = client.getResturants(lat, lng);
+        restaurants.enqueue(new Callback<List<Restaurant>>() {
+            @Override
+            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+                restaurantList.addAll(response.body());
+            }
 
+            @Override
+            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Something bad happend :)", Toast.LENGTH_LONG).show();
+            }
+        });
+        return restaurantList;
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
