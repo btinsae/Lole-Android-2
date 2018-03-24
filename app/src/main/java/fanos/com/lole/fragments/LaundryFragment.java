@@ -22,6 +22,7 @@ import fanos.com.lole.R;
 import fanos.com.lole.adapters.ItemListRVAdapter;
 import fanos.com.lole.model.Laundry;
 import fanos.com.lole.network.LaundryService;
+import fanos.com.lole.utils.Config;
 import fanos.com.lole.utils.RecyclerViewDecorator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -100,7 +101,7 @@ public class LaundryFragment extends Fragment {
     private List<Laundry> getNearByLaundry() {
         final List<Laundry> laundryList=new ArrayList<>();
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl(Config.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         LaundryService client=retrofit.create(LaundryService.class);

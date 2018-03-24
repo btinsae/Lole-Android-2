@@ -25,6 +25,7 @@ import fanos.com.lole.model.Drink;
 import fanos.com.lole.model.Restaurant;
 import fanos.com.lole.network.GroceryService;
 import fanos.com.lole.network.RestaurantService;
+import fanos.com.lole.utils.Config;
 import fanos.com.lole.utils.RecyclerViewDecorator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -103,7 +104,7 @@ public class DrinkFragment extends Fragment {
     private List<Drink> nearByRestaurants(double lat, double lng) {
         final List<Drink> restaurantList = new ArrayList<>();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://")
+                .baseUrl(Config.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         GroceryService client = retrofit.create(GroceryService.class);
 
