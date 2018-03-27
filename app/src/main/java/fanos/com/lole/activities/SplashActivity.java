@@ -3,12 +3,10 @@ package fanos.com.lole.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -34,18 +32,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         mAuth = FirebaseAuth.getInstance();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (isLoggedIn()) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else {
-                    login();
-                }
-            }
-        }, SPLASH_TIME_OUT);
+        splashScreeDelay();
 
     }
 
@@ -69,16 +56,17 @@ public class SplashActivity extends AppCompatActivity {
                 if (response == null) {
                     // User pressed back button
                     //  showSnackbar(R.string.sign_in_cancelled);
+                    Log.d("LOGIN", "login null");
                     return;
                 }
 
-                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    // showSnackbar(R.string.no_internet_connection);
+                if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+                    Log.e("LOGIN", "Network error");
                     return;
                 }
 
-                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-
+                if (response.getError().getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+                    Log.e("LOGIN", "Unknown error");
                     return;
                 }
             }
@@ -119,6 +107,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         GoogleApiAvailability availability = GoogleApiAvailability.getInstance();
         final int PLAY_SERVICES_RESOLUTION_REQUEST = 123;
         int status = availability.isGooglePlayServicesAvailable(this);
@@ -130,10 +119,21 @@ public class SplashActivity extends AppCompatActivity {
                 }
             });
         }
+        splashScreeDelay();
     }
 
-    private void showSnackbar(int msg) {
-
-        Snackbar.make(null, msg, Snackbar.LENGTH_SHORT).show();
+    public void splashScreeDelay() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isLoggedIn()) {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    login();
+                }
+            }
+        }, SPLASH_TIME_OUT);
     }
 }

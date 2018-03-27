@@ -33,6 +33,8 @@ import android.widget.TextView;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -117,13 +119,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.setupWithViewPager(viewPager);
 
 
-
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         /*
-        *
-        *
-        * **/
+         *
+         *
+         * **/
 //        firstImage = true;
 //         imageSwitcher=findViewById(R.id.promotion_image);
 //        Animation imgAnimationIn =  AnimationUtils.
@@ -141,8 +142,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         /*
-        *
-        * */
+         *
+         * */
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
@@ -212,8 +213,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()==R.id.action_logout){
-            FirebaseAuth.getInstance().signOut();
+        if (item.getItemId() == R.id.action_logout) {
+            AuthUI.getInstance().signOut(this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                            finish();
+                        }
+                    });
         }
         return super.onOptionsItemSelected(item);
 
