@@ -22,7 +22,7 @@ public class SearchableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_searcable);
+        setContentView(R.layout.activity_searchable);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 

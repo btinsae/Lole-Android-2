@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.firebase.ui.auth.AuthUI;
@@ -55,7 +56,7 @@ public class SplashActivity extends AppCompatActivity {
                 // Sign in failed
                 if (response == null) {
                     // User pressed back button
-                    //  showSnackbar(R.string.sign_in_cancelled);
+                    Toast.makeText(this,"user pressed back button",Toast.LENGTH_LONG).show();
                     Log.d("LOGIN", "login null");
                     return;
                 }
@@ -79,9 +80,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if (!isLoggedIn()) {
-            login();
-        }
+//        if (!isLoggedIn()) {
+//            login();
+//        }
     }
 
     private boolean isLoggedIn() {
@@ -126,13 +127,13 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (isLoggedIn()) {
+               // if (isLoggedIn()) {
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                } else {
-                    login();
-                }
+//                } else {
+//                    login();
+//                }
             }
         }, SPLASH_TIME_OUT);
     }
