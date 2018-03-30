@@ -38,7 +38,7 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
 
     @Override
     public ItemCategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_category, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_card, parent, false);
         return new ItemCategoryViewHolder(view);
     }
 
@@ -53,10 +53,10 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
     }
 
     class ItemCategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.item_category_icon)
-        AppCompatImageView categoryIcon;
-        @BindView(R.id.item_category_name)
-        AppCompatTextView categoryName;
+//        @BindView(R.id.item_category_icon)
+//        AppCompatImageView categoryIcon;
+//        @BindView(R.id.item_category_name)
+//        AppCompatTextView categoryName;
 
         ItemCategoryViewHolder(View itemView) {
             super(itemView);
