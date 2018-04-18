@@ -112,4 +112,10 @@
     </string>
     <string name="title_activity_progress">Map</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_cons">ConsActivity</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_cart">CartActivity</string>
 </resources>

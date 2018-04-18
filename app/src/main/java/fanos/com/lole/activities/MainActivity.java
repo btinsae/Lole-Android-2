@@ -45,6 +45,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.adapters.ItemCategoryRVAdapter;
+import fanos.com.lole.adapters.MainRVAdapter;
 import fanos.com.lole.adapters.ViewPagerAdapter;
 import fanos.com.lole.fragments.DrinkFragment;
 import fanos.com.lole.fragments.FoodFragment;
@@ -59,10 +60,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Nullable
     TextView mTextMessage;
 
-    @BindView(R.id.container)
-    ViewPager viewPager;
-    @BindView(R.id.tablayout)
-    TabLayout tabLayout;
+//    @BindView(R.id.container)
+//    ViewPager viewPager;
+//    @BindView(R.id.tablayout)
+//    TabLayout tabLayout;
 
 
     @BindView(R.id.navigation)
@@ -114,40 +115,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setSupportActionBar(toolbar);
 
-        setupViewPager(viewPager);
+//        setupViewPager(viewPager);
 
-        tabLayout.setupWithViewPager(viewPager);
+//        tabLayout.setupWithViewPager(viewPager);
 
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        /*
-         *
-         *
-         * **/
-//        firstImage = true;
-//         imageSwitcher=findViewById(R.id.promotion_image);
-//        Animation imgAnimationIn =  AnimationUtils.
-//                loadAnimation(this,   R.anim.shrink);
-//        imageSwitcher.setInAnimation(imgAnimationIn);
-//
-//        Animation imgAnimationOut =  AnimationUtils.
-//                loadAnimation(this,   R.anim.glow);
-//        imageSwitcher.setOutAnimation(imgAnimationOut);
-//
-//        imageSwitchHandler = new Handler();
-//        imageSwitchHandler.post(runnableCode);
 
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-
-
-        /*
-         *
-         * */
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        ItemCategoryRVAdapter mAdapter = new ItemCategoryRVAdapter(this, list());
+        MainRVAdapter mAdapter = new MainRVAdapter(this, list());
         mRecyclerView.setAdapter(mAdapter);
 
         //Navigation Drawer
@@ -161,13 +139,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FoodFragment(), "Delight");
-        adapter.addFragment(new PriceFragment(), "Price");
-        adapter.addFragment(new SpeedFragment(), "Speed");
-        viewPager.setAdapter(adapter);
-    }
+//    private void setupViewPager(ViewPager viewPager) {
+//        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+//        adapter.addFragment(new FoodFragment(), "Delight");
+//        adapter.addFragment(new PriceFragment(), "Price");
+//        adapter.addFragment(new SpeedFragment(), "Speed");
+//        viewPager.setAdapter(adapter);
+//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -232,21 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-//    private Runnable runnableCode = new Runnable() {
-//        @Override
-//        public void run() {
-//
-//            if (firstImage) {
-//                imageSwitcher.setImageResource(R.drawable.ic_home_black_24dp);
-//                firstImage = false;
-//            } else {
-//                imageSwitcher.setImageResource(R.drawable.ic_account_circle_black_24dp);
-//                firstImage = true;
-//            }
-//
-//            imageSwitchHandler.postDelayed(this, 3000);
-//        }
-//    };
+
 
     private List<ItemCategory> list() {
         List<ItemCategory> list = new ArrayList<>();

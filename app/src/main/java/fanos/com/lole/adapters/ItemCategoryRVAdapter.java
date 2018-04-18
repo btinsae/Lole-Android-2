@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fanos.com.lole.R;
+import fanos.com.lole.activities.MenuActivity;
 import fanos.com.lole.activities.SearchableActivity;
 import fanos.com.lole.model.ItemCategory;
 
@@ -68,7 +69,7 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), SearchableActivity.class);
+            Intent intent = new Intent(view.getContext(),  MenuActivity.class);
             mContext.startActivity(intent);
         }
     }

@@ -3,25 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="88dp"
-
-    android:layout_marginTop="8dp">
+    android:layout_height="104dp"
+    android:layout_marginTop="8dp"
+    >
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="16dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="6dp"
+
         android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,6 +50,8 @@
         android:layout_marginStart="16dp"
         android:text="Efoy Pizza"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold"
         app:fontFamily="sans-serif"
         app:layout_constraintBottom_toTopOf="@+id/appCompatTextView2"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -59,63 +63,32 @@
         android:id="@+id/appCompatTextView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="92dp"
-        android:text="lorem epsumlorem epsumlorem "
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="lorem epsumlorem epsumlorem lorem epsumlorem epsumlorem "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/secondary_text"
         app:fontFamily="sans-serif"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView4"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/appCompatTextView4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="10/10"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="$65.50"
         app:fontFamily="sans-serif"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2"
-        tools:text="10/10" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="34dp"
-        android:text="save $3.00"
-        app:fontFamily="sans-serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView3"
-        app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
-        tools:text="save $3.00" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="82dp"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="67dp"
-        android:text="34 min"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/appCompatTextView5"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:text="$65.50" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
