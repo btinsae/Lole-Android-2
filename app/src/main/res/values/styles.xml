@@ -8,7 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
-
+    <style name="MyFloatingButton" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/floating_color</item>
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

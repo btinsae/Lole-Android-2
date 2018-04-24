@@ -219,7 +219,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView18" />
 
-    <view
+    <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -280,6 +280,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:background="@color/colorPrimary"
+        android:onClick="goTo"
         android:text="Place Order"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -301,4 +302,11 @@
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:rippleColor="@color/colorPrimary"
+        android:src="@drawable/ic_add_white"
+        android:theme="@style/MyFloatingButton"
+        app:fabSize="mini" />
 </android.support.constraint.ConstraintLayout>

@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     private static final int RC_ERROR = 321;
-    private static int SPLASH_TIME_OUT = 4000;
+    private static int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

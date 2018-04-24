@@ -38,6 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import android.Manifest;
+import android.util.Log;
 
 import fanos.com.lole.R;
 
@@ -52,6 +53,7 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
     Toolbar toolbar;
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private double lat, lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,8 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
                         @Override
                         public void onSuccess(Location location) {
                             if (location != null) {
-
+                                lat = location.getLatitude();
+                                lng = location.getLongitude();
                             }
                         }
                     });
@@ -106,7 +109,7 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
         task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-
+                Log.d("LOC",locationSettingsResponse.getLocationSettingsStates().isLocationPresent()+"");
             }
         });
         task.addOnFailureListener(this, new OnFailureListener() {
@@ -152,7 +155,7 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(41.889, -87.622), 16));
+                new LatLng(lat, lng), 16));
 
         // You can customize the marker image using images bundled with
         // your app, or dynamically generated bitmaps.
@@ -169,16 +172,16 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-        case MY_PERMISSIONS_REQUEST_ACCESS_LOCATION:
-            if (grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED) {
-                // permission was granted, yay! Do the
-                // contacts-related task you need to do.
-            }else {
-                // permission denied, boo! Disable the
-                // functionality that depends on this permission.
-            }
-            return;
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_ACCESS_LOCATION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
         }
 
     }
