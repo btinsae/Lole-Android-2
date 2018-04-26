@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_order:
-                    // mTextMessage.setText(R.string.title_notifications);
+                    startActivity(new Intent(MainActivity.this, LaundryActivity.class));
                     return true;
                 case R.id.navigation_checkout:
                     // mTextMessage.setText(R.string.title_notifications);
@@ -209,7 +209,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onFragmentInteraction(Uri uri) {
 
     }
-
 
 
     private List<ItemCategory> list() {
