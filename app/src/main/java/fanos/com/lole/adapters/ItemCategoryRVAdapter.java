@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
     @Override
     public void onBindViewHolder(ItemCategoryViewHolder holder, int position) {
 
+        Glide.with(mContext).load(R.drawable.food_one).into(holder.categoryIcon);
     }
 
     @Override
@@ -54,8 +57,8 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
     }
 
     class ItemCategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-//        @BindView(R.id.item_category_icon)
-//        AppCompatImageView categoryIcon;
+        @BindView(R.id.imageView2)
+       AppCompatImageView categoryIcon;
 //        @BindView(R.id.item_category_name)
 //        AppCompatTextView categoryName;
 
