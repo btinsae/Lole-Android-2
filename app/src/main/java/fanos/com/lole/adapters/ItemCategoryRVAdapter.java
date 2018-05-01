@@ -1,10 +1,9 @@
 package fanos.com.lole.adapters;
 
-import android.content.ClipData;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.activities.MenuActivity;
-import fanos.com.lole.activities.SearchableActivity;
 import fanos.com.lole.model.ItemCategory;
 
 /**
@@ -33,7 +31,7 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
     private List<ItemCategory> list = new ArrayList<>();
     private Context mContext;
 
-    public ItemCategoryRVAdapter(Context mContext, List<ItemCategory> list) {
+    ItemCategoryRVAdapter(Context mContext, List<ItemCategory> list) {
         this.list = list;
         this.mContext = mContext;
 
