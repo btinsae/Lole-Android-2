@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -21,23 +22,26 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fanos.com.lole.R;
+import fanos.com.lole.model.Laundry;
 
-public class LaundryActivity extends AppCompatActivity /*implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener*/ {
+public class LaundryActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     @BindView(R.id.time_picker)
     EditText timePicker;
     @BindView(R.id.date_picker)
     EditText datePicker;
     @BindView(R.id.place_picker)
-    Button placePicker;
+    ImageButton placePicker;
     Calendar calendar;
     private int day, month, year;
     int PLACE_PICKER_REQUEST = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,29 +53,21 @@ public class LaundryActivity extends AppCompatActivity /*implements DatePickerDi
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
+
+        final TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.MyDialogTheme, this, 12, 0, false);
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.MyDialogTheme, this, year, month, day);
+
+
         timePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(LaundryActivity.this, R.style.MyDialogTheme, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker picker, int i, int i1) {
-                        timePicker.setText(i + ":" + i1);
-                    }
-                }, 1, 0, false);
-                timePickerDialog.show();
+                timePickerDialog.show();   //new TimePickerDialog(LaundryActivity.this, R.style.MyDialogTheme,LaundryActivity.this,12,0,false).show();
             }
         });
         datePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(LaundryActivity.this, R.style.MyDialogTheme, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker picker, int year, int month, int day) {
-                      String monthName= calendar.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault())  ;
-                        datePicker.setText(monthName+" "+day+", "+year);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
+                datePickerDialog.show();  //new DatePickerDialog(LaundryActivity.this, LaundryActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -99,16 +95,31 @@ public class LaundryActivity extends AppCompatActivity /*implements DatePickerDi
         });
     }
 
-//
-//    @Override
-//    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-//
-//    }
-//
-//    @Override
-//    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-//
-//    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        updateDateEditText();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+        updateTimeEditText(hour, minute);
+    }
+
+    private void updateDateEditText() {
+      //  String myFormat = "MM/dd/yy"; //In which you need put here
+        String monthName= calendar.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault()) ;
+       // SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//sdf.format(calendar.getTime())
+        datePicker.setText(monthName+" "+calendar.get(Calendar.DAY_OF_MONTH)+", "+calendar.get(Calendar.YEAR));
+    }
+
+    private void updateTimeEditText(int hour, int minute) {
+        timePicker.setText(hour + " : " + minute);
+    }
 
     private void pickUpLocation(View view) {
 
