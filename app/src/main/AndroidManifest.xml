@@ -21,7 +21,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:launchMode="singleTop"/>
         <activity android:name=".activities.SplashActivity">
 
             <!-- enable the search dialog to send searches to SearchableActivity -->
@@ -40,7 +41,7 @@
             android:name=".providers.SearchContentProvider"
             android:authorities="fanos.com.lole.search"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity
             android:name=".activities.SearchableActivity"
@@ -100,6 +101,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fanos.com.lole.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.SettingActivity"
+            android:theme="@style/SettingTheme"
+            android:parentActivityName=".activities.SettingActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
         </activity>
     </application>
 

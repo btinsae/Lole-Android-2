@@ -1,5 +1,6 @@
 package fanos.com.lole.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,30 +15,29 @@ import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.adapters.MenuRVAdapter;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity implements MenuRVAdapter.MenuItemClickListener {
     @BindView(R.id.menu_recycler_view)
     RecyclerView mRecyclerView;
-
+    MenuRVAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-        MenuRVAdapter adapter = new MenuRVAdapter(this);
+        mAdapter = new MenuRVAdapter(this, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public void onMenuItemClickListener(int position) {
+        Intent startDetailActivity = new Intent(this, CartActivity.class);
+        mAdapter.getMenuItems().get(position);
+        startActivity(startDetailActivity);
+    }
 }

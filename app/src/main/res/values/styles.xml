@@ -6,7 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
 
+    </style>
+
+    <style name="SettingTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
 
     <style name="MyFloatingButton" parent="Theme.AppCompat.Light">
@@ -30,11 +37,13 @@
         <item name="android:textColorPrimary">@color/primary_text</item>
         <item name="android:windowBackground">@drawable/dialog_background</item>
     </style>
+
     <style name="MyEditText" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/primary_text</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="colorControlHighlight">@color/colorPrimary</item>
     </style>
+
     <style name="MyHintText" parent="TextAppearance.AppCompat.Small">
         <item name="android:textColor">@color/colorPrimary</item>
         <!--<item name="android:textSize">20sp</item>-->
