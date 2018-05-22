@@ -1,4 +1,4 @@
-package fanos.com.lole.db;
+package fanos.com.lole.database;
 
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
@@ -23,6 +23,5 @@ public abstract class AppDatabase extends RoomDatabase {
         return sInstance;
     }
 
-    private AppDatabase() {
-    }
+    public abstract OrderDao orderDao();
 }

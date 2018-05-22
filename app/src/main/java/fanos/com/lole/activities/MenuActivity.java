@@ -16,7 +16,7 @@ import fanos.com.lole.R;
 import fanos.com.lole.adapters.MenuRVAdapter;
 
 public class MenuActivity extends AppCompatActivity implements MenuRVAdapter.MenuItemClickListener {
-    @BindView(R.id.menu_recycler_view)
+    @BindView(R.id.rv_menu)
     RecyclerView mRecyclerView;
     MenuRVAdapter mAdapter;
     @Override
@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity implements MenuRVAdapter.Men
     @Override
     public void onMenuItemClickListener(int position) {
         Intent startDetailActivity = new Intent(this, CartActivity.class);
-        mAdapter.getMenuItems().get(position);
+       // mAdapter.getMenuItems().get(position);
         startActivity(startDetailActivity);
     }
 }
