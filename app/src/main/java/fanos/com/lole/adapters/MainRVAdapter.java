@@ -18,16 +18,21 @@ import fanos.com.lole.model.ItemCategory;
 public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.MainRVholder> {
     Context mContext;
     List<ItemCategory> list = new ArrayList<>();
+    private RecyclerView.RecycledViewPool viewPool;
 
     public MainRVAdapter(Context mContext, List<ItemCategory> list) {
         this.mContext = mContext;
         this.list = list;
+        this.viewPool = new RecyclerView.RecycledViewPool();
+
     }
 
     @Override
     public MainRVholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vertical_recycler_view, parent, false);
-        return new MainRVholder(view);
+        MainRVholder mViewHolder = new MainRVholder(view);
+        mViewHolder.mRecyclerView.setRecycledViewPool(viewPool);
+        return mViewHolder;
     }
 
     @Override
@@ -47,7 +52,7 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.MainRVhold
         MainRVholder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             mRecyclerView.setAdapter(new ItemCategoryRVAdapter(mContext, list));
         }
     }
