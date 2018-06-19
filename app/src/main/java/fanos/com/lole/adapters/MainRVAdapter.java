@@ -1,6 +1,7 @@
 package fanos.com.lole.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,27 +17,34 @@ import fanos.com.lole.R;
 import fanos.com.lole.model.ItemCategory;
 
 public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.MainRVholder> {
-    Context mContext;
-    List<ItemCategory> list = new ArrayList<>();
-    private RecyclerView.RecycledViewPool viewPool;
+    private Context mContext;
+    private List<ItemCategory> list;
+     final ItemCategoryRVAdapter.ItemClickListener listener;
 
-    public MainRVAdapter(Context mContext, List<ItemCategory> list) {
+    public MainRVAdapter(Context mContext, List<ItemCategory> list, ItemCategoryRVAdapter.ItemClickListener listener) {
         this.mContext = mContext;
         this.list = list;
-        this.viewPool = new RecyclerView.RecycledViewPool();
-
+        this.listener = listener;
     }
 
+    public void setList(List<ItemCategory> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
+    public List<ItemCategory> getList() {
+        return list;
+    }
+
+    @NonNull
     @Override
-    public MainRVholder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MainRVholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vertical_recycler_view, parent, false);
-        MainRVholder mViewHolder = new MainRVholder(view);
-        mViewHolder.mRecyclerView.setRecycledViewPool(viewPool);
-        return mViewHolder;
+        return new MainRVholder(view);
     }
 
     @Override
-    public void onBindViewHolder(MainRVholder holder, int position) {
+    public void onBindViewHolder(@NonNull MainRVholder holder, int position) {
 
     }
 
@@ -45,7 +53,7 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.MainRVhold
         return 5;
     }
 
-    class MainRVholder extends RecyclerView.ViewHolder {
+    class MainRVholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.vertical_recycler_view)
         RecyclerView mRecyclerView;
 
@@ -53,7 +61,12 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.MainRVhold
             super(itemView);
             ButterKnife.bind(this, itemView);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-            mRecyclerView.setAdapter(new ItemCategoryRVAdapter(mContext, list));
+            mRecyclerView.setAdapter(new ItemCategoryRVAdapter(mContext, list ));
+        }
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 }

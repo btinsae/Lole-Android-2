@@ -30,11 +30,12 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
 
     private List<ItemCategory> list = new ArrayList<>();
     private Context mContext;
+    private ItemListRVAdapter.ItemListClickListener itemListClickListener;
 
-    ItemCategoryRVAdapter(Context mContext, List<ItemCategory> list) {
+    ItemCategoryRVAdapter(Context mContext, List<ItemCategory> list, ItemListRVAdapter.ItemListClickListener listener) {
         this.list = list;
         this.mContext = mContext;
-
+        this.itemListClickListener = listener;
     }
 
     @Override
@@ -49,14 +50,19 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
         Glide.with(mContext).load(R.drawable.food_one).into(holder.categoryIcon);
     }
 
+    public interface ItemClickListener {
+        void onItemClickListener(int position);
+    }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
 
+
     class ItemCategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.imageView2)
-       AppCompatImageView categoryIcon;
+        AppCompatImageView categoryIcon;
 //        @BindView(R.id.item_category_name)
 //        AppCompatTextView categoryName;
 
@@ -70,8 +76,9 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(),  MenuActivity.class);
-            mContext.startActivity(intent);
+            itemListClickListener.onClickListener(getAdapterPosition());
+//            Intent intent = new Intent(view.getContext(), MenuActivity.class);
+//            mContext.startActivity(intent);
         }
     }
 }

@@ -1,10 +1,12 @@
 package fanos.com.lole.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Birhane on 2/17/2018.
  */
 
-public class ItemCategory {
+public class ItemCategory implements Serializable{
     private  int icon;
     private String name;
 

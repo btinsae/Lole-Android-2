@@ -1,7 +1,7 @@
 package fanos.com.lole.adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fanos.com.lole.R;
-import fanos.com.lole.activities.ProgressActivity;
 
 /**
  * Created by Birhane on 2/17/2018.
@@ -20,22 +19,29 @@ import fanos.com.lole.activities.ProgressActivity;
 public class ItemListRVAdapter extends RecyclerView.Adapter<ItemListRVAdapter.ItemListViewHolder> {
     private Context mContext;
     private List<? extends Object> list = new ArrayList<>();
+    private  ItemListClickListener listener;
 
-    public ItemListRVAdapter(Context mContext, List<? extends Object> list) {
+    public ItemListRVAdapter(Context mContext, List<? extends Object> list,ItemListClickListener listener) {
         this.mContext = mContext;
-        this.list=list;
+        this.list = list;
+        this.listener=listener;
     }
 
+    @NonNull
     @Override
-    public ItemListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ItemListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
 
         return new ItemListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ItemListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemListViewHolder holder, int position) {
 
+    }
+
+    public interface ItemListClickListener {
+        void onClickListener(int position);
     }
 
     @Override
@@ -51,8 +57,7 @@ public class ItemListRVAdapter extends RecyclerView.Adapter<ItemListRVAdapter.It
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), ProgressActivity.class);
-            mContext.startActivity(intent);
+           listener.onClickListener(getAdapterPosition());
         }
     }
 }

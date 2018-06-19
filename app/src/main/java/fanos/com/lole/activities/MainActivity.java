@@ -54,16 +54,11 @@ import fanos.com.lole.fragments.PriceFragment;
 import fanos.com.lole.fragments.SpeedFragment;
 import fanos.com.lole.model.ItemCategory;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SpeedFragment.OnFragmentInteractionListener, FoodFragment.OnFragmentInteractionListener, PriceFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SpeedFragment.OnFragmentInteractionListener, FoodFragment.OnFragmentInteractionListener, PriceFragment.OnFragmentInteractionListener, ItemCategoryRVAdapter.ItemClickListener {
 
     @BindView(R.id.message)
     @Nullable
     TextView mTextMessage;
-
-//    @BindView(R.id.container)
-//    ViewPager viewPager;
-//    @BindView(R.id.tablayout)
-//    TabLayout tabLayout;
 
 
     @BindView(R.id.navigation)
@@ -76,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+
+    private static final String EXTRA_MENU_ITEM = "menu item";
 
     //Firebase auth instance
     private FirebaseAuth mAuth;
@@ -105,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     };
     private boolean firstImage;
+    private MainRVAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        MainRVAdapter mAdapter = new MainRVAdapter(this, list());
+        mAdapter = new MainRVAdapter(this, list());
         mRecyclerView.setAdapter(mAdapter);
 
         //Navigation Drawer
@@ -162,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         }
 
@@ -220,4 +218,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public void onItemClickListener(int position) {
+        Intent menuActivityIntent = new Intent(this, MenuActivity.class);
+        menuActivityIntent.putExtra(EXTRA_MENU_ITEM, mAdapter.getList().get(position));
+        startActivity(menuActivityIntent);
+    }
 }
