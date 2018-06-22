@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 
@@ -23,6 +24,15 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void goTo(View view) {
-        startActivity(new Intent(this,ProgressActivity.class));
+        startActivity(new Intent(this, ProgressActivity.class));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int menuItem = item.getItemId();
+        if (menuItem == android.R.id.home)
+            onBackPressed();
+        return super.onOptionsItemSelected(item);
+
     }
 }

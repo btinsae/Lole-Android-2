@@ -101,6 +101,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fanos.com.lole.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.SettingActivity"
+            android:label="@string/title_activity_laundry"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fanos.com.lole.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.OrderActivity"
+            android:label="@string/title_activity_laundry"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fanos.com.lole.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -45,6 +45,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fanos.com.lole.R;
 import fanos.com.lole.adapters.ItemCategoryRVAdapter;
+import fanos.com.lole.adapters.ItemListRVAdapter;
 import fanos.com.lole.adapters.MainRVAdapter;
 import fanos.com.lole.adapters.ViewPagerAdapter;
 import fanos.com.lole.fragments.DrinkFragment;
@@ -53,8 +54,9 @@ import fanos.com.lole.fragments.LaundryFragment;
 import fanos.com.lole.fragments.PriceFragment;
 import fanos.com.lole.fragments.SpeedFragment;
 import fanos.com.lole.model.ItemCategory;
+import fanos.com.lole.model.Order;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SpeedFragment.OnFragmentInteractionListener, FoodFragment.OnFragmentInteractionListener, PriceFragment.OnFragmentInteractionListener, ItemCategoryRVAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SpeedFragment.OnFragmentInteractionListener, FoodFragment.OnFragmentInteractionListener, PriceFragment.OnFragmentInteractionListener, ItemListRVAdapter.ItemListClickListener {
 
     @BindView(R.id.message)
     @Nullable
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        mAdapter = new MainRVAdapter(this, list());
+        mAdapter = new MainRVAdapter(this, list(), this);
         mRecyclerView.setAdapter(mAdapter);
 
         //Navigation Drawer
@@ -158,9 +160,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
-
+            startActivity(new Intent(MainActivity.this, OrderActivity.class));
         } else if (id == R.id.nav_send) {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(intent);
         }
 
@@ -219,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public void onItemClickListener(int position) {
+    public void onClickListener(int position) {
         Intent menuActivityIntent = new Intent(this, MenuActivity.class);
         menuActivityIntent.putExtra(EXTRA_MENU_ITEM, mAdapter.getList().get(position));
         startActivity(menuActivityIntent);

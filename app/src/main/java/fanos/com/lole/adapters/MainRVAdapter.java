@@ -19,9 +19,9 @@ import fanos.com.lole.model.ItemCategory;
 public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.MainRVholder> {
     private Context mContext;
     private List<ItemCategory> list;
-     final ItemCategoryRVAdapter.ItemClickListener listener;
+    final ItemListRVAdapter.ItemListClickListener listener;
 
-    public MainRVAdapter(Context mContext, List<ItemCategory> list, ItemCategoryRVAdapter.ItemClickListener listener) {
+    public MainRVAdapter(Context mContext, List<ItemCategory> list, ItemListRVAdapter.ItemListClickListener listener) {
         this.mContext = mContext;
         this.list = list;
         this.listener = listener;
@@ -61,7 +61,7 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.MainRVhold
             super(itemView);
             ButterKnife.bind(this, itemView);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-            mRecyclerView.setAdapter(new ItemCategoryRVAdapter(mContext, list ));
+            mRecyclerView.setAdapter(new ItemCategoryRVAdapter(mContext, list, listener));
         }
 
         @Override

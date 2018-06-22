@@ -38,7 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Use the {@link FoodFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FoodFragment extends Fragment {
+public class FoodFragment extends Fragment implements ItemListRVAdapter.ItemListClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -95,7 +95,7 @@ public class FoodFragment extends Fragment {
         recyclerView.addItemDecoration(new RecyclerViewDecorator(drawable));
 
 
-        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity(), nearByRestaurants(18.00, 25.00));
+        ItemListRVAdapter adapter = new ItemListRVAdapter(getActivity(), nearByRestaurants(18.00, 25.00),this);
         recyclerView.setAdapter(adapter);
 
 
@@ -145,6 +145,11 @@ public class FoodFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClickListener(int position) {
+
     }
 
     /**

@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -36,7 +38,17 @@ public class OrderActivity extends AppCompatActivity implements MenuRVAdapter.Me
         mAdapter = new MenuRVAdapter(this, this);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
 
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            Toast.makeText(OrderActivity.this,"Swiped",Toast.LENGTH_LONG).show();
+            }
+        }).attachToRecyclerView(mRecyclerView);
 
         setUpViewModel();
     }
