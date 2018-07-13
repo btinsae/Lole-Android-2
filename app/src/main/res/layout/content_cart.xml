@@ -10,7 +10,7 @@
     tools:showIn="@layout/activity_cart">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tv_service_provider_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tv_eta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -37,7 +37,7 @@
         android:text="Delivering to Your door. 40-45 min"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_service_provider_name" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -50,15 +50,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="34dp"
         app:layout_constraintBottom_toTopOf="@+id/textView13"
-        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintEnd_toStartOf="@+id/tv_location_name"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/tv_eta"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_location_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_eta" />
 
     <TextView
         android:id="@+id/textView11"
@@ -81,10 +81,11 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         android:text="Delivering to door"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintStart_toStartOf="@+id/tv_location_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location_name" />
 
     <TextView
         android:id="@+id/textView12"
@@ -114,7 +115,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="lkuanda"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintEnd_toStartOf="@+id/textView22"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -270,7 +271,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView20"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-    <Button
+    <android.support.design.button.MaterialButton
         android:id="@+id/button2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

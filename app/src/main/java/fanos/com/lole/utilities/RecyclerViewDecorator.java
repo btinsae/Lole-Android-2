@@ -1,12 +1,10 @@
-package fanos.com.lole.utils;
+package fanos.com.lole.utilities;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import fanos.com.lole.R;
 
 /**
  * Created by Birhane on 2/20/2018.

@@ -21,9 +21,8 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.MainRVhold
     private List<ItemCategory> list;
     final ItemListRVAdapter.ItemListClickListener listener;
 
-    public MainRVAdapter(Context mContext, List<ItemCategory> list, ItemListRVAdapter.ItemListClickListener listener) {
+    public MainRVAdapter(Context mContext, ItemListRVAdapter.ItemListClickListener listener) {
         this.mContext = mContext;
-        this.list = list;
         this.listener = listener;
     }
 

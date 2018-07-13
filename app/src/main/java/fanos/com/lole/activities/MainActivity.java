@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -63,14 +64,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView mTextMessage;
 
 
-    @BindView(R.id.navigation)
-    BottomNavigationView navigation;
+//    @BindView(R.id.navigation)
+//    BottomNavigationView navigation;
     @BindView(R.id.item_category)
     RecyclerView mRecyclerView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+//    @BindView(R.id.toolbar)
+//    Toolbar toolbar;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
@@ -81,28 +82,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Choose an arbitrary request code value
     private static final int RC_SIGN_IN = 123;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    // mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_account:
-                    // mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_order:
-                    startActivity(new Intent(MainActivity.this, LaundryActivity.class));
-                    return true;
-                case R.id.navigation_checkout:
-                    // mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
+//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//
+//        @Override
+//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//            switch (item.getItemId()) {
+//                case R.id.navigation_home:
+//                    // mTextMessage.setText(R.string.title_home);
+//                    return true;
+//                case R.id.navigation_account:
+//                    // mTextMessage.setText(R.string.title_dashboard);
+//                    return true;
+//                case R.id.navigation_order:
+//                    startActivity(new Intent(MainActivity.this, LaundryActivity.class));
+//                    return true;
+//                case R.id.navigation_checkout:
+//                    // mTextMessage.setText(R.string.title_notifications);
+//                    return true;
+//            }
+//            return false;
+//        }
+//    };
     private boolean firstImage;
     private MainRVAdapter mAdapter;
 
@@ -112,30 +113,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        setSupportActionBar(toolbar);
+        BottomAppBar bar = (BottomAppBar) findViewById(R.id.bar);
+        setSupportActionBar(bar);
+       // setSupportActionBar(toolbar);
 
 //        setupViewPager(viewPager);
 
 //        tabLayout.setupWithViewPager(viewPager);
 
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+     //   navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        mAdapter = new MainRVAdapter(this, list(), this);
+        mAdapter = new MainRVAdapter(this, this);
+        mAdapter.setList(list());
         mRecyclerView.setAdapter(mAdapter);
 
         //Navigation Drawer
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, bar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-
+//
+//
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -171,39 +174,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the options menu from XML
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-
-
-        // Get the SearchView and set the searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
-
-        return true;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
-            AuthUI.getInstance().signOut(this)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            startActivity(new Intent(MainActivity.this, SplashActivity.class));
-                            finish();
-                        }
-                    });
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the options menu from XML
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.main_menu, menu);
+//
+//
+//        // Get the SearchView and set the searchable configuration
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+//        // Assumes current activity is the searchable activity
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+//
+//        return true;
+//
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.action_logout) {
+//            AuthUI.getInstance().signOut(this)
+//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            startActivity(new Intent(MainActivity.this, SplashActivity.class));
+//                            finish();
+//                        }
+//                    });
+//        }
+//        return super.onOptionsItemSelected(item);
+//
+//    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {

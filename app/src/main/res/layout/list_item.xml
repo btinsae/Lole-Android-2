@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
     android:layout_height="104dp"
     android:layout_marginTop="8dp"
-    >
+    android:background="@android:color/white">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="16dp"
         app:layout_constraintStart_toStartOf="parent" />
@@ -22,15 +21,12 @@
         android:id="@+id/appCompatImageView"
         android:layout_width="70dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="6dp"
-
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toEndOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@id/appCompatTextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@id/tv_item_name"
+        app:srcCompat="@mipmap/ic_launcher" />
     <!--app:srcCompat="@mipmap/ic_launcher_round"-->
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"
@@ -40,7 +36,7 @@
         app:layout_constraintGuide_begin="80dp" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView"
+        android:id="@+id/tv_item_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -52,14 +48,14 @@
         android:textColor="@color/primary_text"
         android:textStyle="bold"
         app:fontFamily="sans-serif"
-        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView2"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
         app:layout_constraintTop_toTopOf="@+id/appCompatImageView"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="Efoy Pizza" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView2"
+        android:id="@+id/tv_item_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -68,27 +64,27 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/secondary_text"
         app:fontFamily="sans-serif"
-        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView4"
+        app:layout_constraintBottom_toTopOf="@+id/tv_item_price"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+        app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_name" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView4"
-        android:layout_width="0dp"
+        android:id="@+id/tv_item_price"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         android:text="65.50 ETB"
-        android:textColor="@color/primary_text"
-        app:fontFamily="sans-serif"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2"
+        app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_description"
         tools:text="65.50 ETB" />
 
     <android.support.constraint.Guideline

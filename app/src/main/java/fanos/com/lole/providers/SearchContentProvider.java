@@ -7,6 +7,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class SearchContentProvider extends ContentProvider {
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        uriMatcher.addURI("fanos.com.lole.search", ITEMS, 1);
+        uriMatcher.addURI("fanos.com.lole.provider", ITEMS, 1);
     }
 
 
@@ -57,7 +58,7 @@ public class SearchContentProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         String queryType = "";
         switch (uriMatcher.match(uri)) {
@@ -113,7 +114,7 @@ public class SearchContentProvider extends ContentProvider {
         return items;
     }
 
-    private String getItemName(String suggestion){
+    private String getItemName(String suggestion) {
         String suggestionWords[] = suggestion.split(" ");
         return suggestionWords[0].toLowerCase();
     }

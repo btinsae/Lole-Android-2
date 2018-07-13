@@ -1,4 +1,4 @@
-package fanos.com.lole.utils;
+package fanos.com.lole.utilities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

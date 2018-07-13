@@ -1,5 +1,6 @@
 package fanos.com.lole.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -49,8 +50,8 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
     private static final int REQUEST_CHECK_SETTINGS = 1234;
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_LOCATION = 4321;
     private GoogleMap mMap;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+//    @BindView(R.id.toolbar)
+//    Toolbar toolbar;
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private double lat, lng;
@@ -61,8 +62,8 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
         setContentView(R.layout.activity_progress);
 
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(toolbar);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -83,16 +84,7 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
                 // result of the request.
             }
         } else {
-            mFusedLocationProviderClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-                                lat = location.getLatitude();
-                                lng = location.getLongitude();
-                            }
-                        }
-                    });
+            locationRequest();
         }
 
         mLocationRequest = LocationRequest.create();
@@ -136,6 +128,20 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
         mapFragment.getMapAsync(this);
     }
 
+    @SuppressLint("MissingPermission")
+    private void locationRequest() {
+        mFusedLocationProviderClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            lat = location.getLatitude();
+                            lng = location.getLongitude();
+                        }
+                    }
+                });
+    }
+
 
     /**
      * Manipulates the map once available.
@@ -177,6 +183,7 @@ public class ProgressActivity extends AppCompatActivity implements OnMapReadyCal
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
+                    locationRequest();
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.

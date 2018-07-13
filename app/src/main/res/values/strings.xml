@@ -110,6 +110,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="main_notification_channel_name">Main notification channel</string>
     <string name="title_activity_progress">Map</string>
     <string name="logout">Logout</string>
     <string name="title_activity_cons">ConsActivity</string>

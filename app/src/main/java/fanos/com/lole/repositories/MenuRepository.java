@@ -10,7 +10,7 @@ import javax.inject.Singleton;
 
 import fanos.com.lole.database.MenuDao;
 import fanos.com.lole.model.ServiceProviderMenu;
-import fanos.com.lole.utils.AppExecutors;
+import fanos.com.lole.utilities.AppExecutors;
 import fanos.com.lole.webservice.MenuService;
 import retrofit2.Response;
 

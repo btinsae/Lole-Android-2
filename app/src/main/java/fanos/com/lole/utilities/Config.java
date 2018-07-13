@@ -1,4 +1,4 @@
-package fanos.com.lole.utils;
+package fanos.com.lole.utilities;
 
 /**
  * Created by Birhane on 3/24/2018.

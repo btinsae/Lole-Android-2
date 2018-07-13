@@ -1,4 +1,4 @@
-package fanos.com.lole.utils;
+package fanos.com.lole.utilities;
 
 import android.os.Handler;
 import android.os.Looper;

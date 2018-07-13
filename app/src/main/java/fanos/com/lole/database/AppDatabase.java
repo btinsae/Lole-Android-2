@@ -3,12 +3,17 @@ package fanos.com.lole.database;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
 
 import fanos.com.lole.model.Order;
+import fanos.com.lole.model.ServiceProvider;
+import fanos.com.lole.model.ServiceProviderMenu;
 
-@Database(entities = {Order.class}, version = 1, exportSchema = false)
+@Database(entities = {Order.class, ServiceProvider.class, ServiceProviderMenu.class}, version = 1, exportSchema = false)
+@TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static AppDatabase sInstance;

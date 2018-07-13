@@ -6,7 +6,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/price_recyclerview"
+        android:id="@+id/rv_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

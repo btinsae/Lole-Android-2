@@ -29,9 +29,9 @@ import butterknife.ButterKnife;
 import fanos.com.lole.R;
 
 public class LaundryActivity extends AppCompatActivity /*implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener*/ {
-    @BindView(R.id.time_picker)
+    @BindView(R.id.et_time_picker)
     EditText timePicker;
-    @BindView(R.id.date_picker)
+    @BindView(R.id.et_date_picker)
     EditText datePicker;
     @BindView(R.id.place_picker)
     Button placePicker;
