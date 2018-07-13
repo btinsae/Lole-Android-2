@@ -61,7 +61,7 @@ public class ItemCategoryRVAdapter extends RecyclerView.Adapter<ItemCategoryRVAd
 
 
     class ItemCategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.imageView2)
+        @BindView(R.id.iv_item_image)
         AppCompatImageView categoryIcon;
 //        @BindView(R.id.item_category_name)
 //        AppCompatTextView categoryName;
